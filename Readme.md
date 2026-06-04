@@ -11,3 +11,13 @@ https://github.com/wyrm65/resource.images.classificationicons.colour
 
 Language flags sourced from im85288's language flag icon pack
 https://github.com/im85288/resource.images.languageflags.colour
+
+## Kodi Repository
+
+This fork includes a Kodi repository addon for easier installs and updates:
+
+- `repository.jirapatr.thai-1.0.0.zip`
+- Repository name in Kodi: `Jirapatr Thai Repository`
+
+Install the repository zip first, then install `Arctic Horizon 2 - Thai` from that repository.
+The skin still depends on the jurialmunkey helper add-ons it already used upstream, so keeping the upstream repository enabled is still recommended.
