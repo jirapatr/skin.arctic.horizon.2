@@ -18,6 +18,7 @@ This fork includes a Kodi repository addon for easier installs and updates:
 
 - `repository.jirapatr.thai-1.0.0.zip`
 - Repository name in Kodi: `Jirapatr Thai Repository`
+- GitHub Pages source URL: `https://jirapatr.github.io/skin.arctic.horizon.2/`
 
-Install the repository zip first, then install `Arctic Horizon 2 - Thai` from that repository.
+Open the Pages URL, install the repository zip first, then install `Arctic Horizon 2 - Thai` from that repository.
 The skin still depends on the jurialmunkey helper add-ons it already used upstream, so keeping the upstream repository enabled is still recommended.
