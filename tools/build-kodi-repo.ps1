@@ -57,6 +57,7 @@ $skinZip = Join-Path $skinFeedDir ("skin.arctic.horizon.2-{0}.zip" -f $skinVersi
 New-ZipFromFolder -SourceFolder $skinRoot -DestinationZip $skinZip -ExcludePatterns @(
     '.git',
     '.git/*',
+    'index.html',
     'repo',
     'repo/*',
     'repository.jirapatr.thai',
@@ -96,8 +97,7 @@ function New-IndexHtml {
     param(
         [string]$Path,
         [string]$RepoZipName,
-        [string]$SkinZipRelativePath,
-        [string]$FeedRelativePath
+        [string]$RepoZipRelativePath
     )
 
     $html = @"
@@ -107,81 +107,9 @@ function New-IndexHtml {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Jirapatr Thai Repository</title>
-    <style>
-        :root {
-            color-scheme: dark;
-            --bg: #0d1117;
-            --panel: #161b22;
-            --text: #e6edf3;
-            --muted: #8b949e;
-            --accent: #58a6ff;
-            --border: #30363d;
-        }
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            background: radial-gradient(circle at top, #17324f, var(--bg) 65%);
-            color: var(--text);
-            font: 16px/1.5 Arial, Helvetica, sans-serif;
-        }
-        main {
-            width: min(720px, calc(100vw - 32px));
-            padding: 28px;
-            background: rgba(22, 27, 34, 0.92);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-        }
-        h1 {
-            margin: 0 0 8px;
-            font-size: 2rem;
-            line-height: 1.1;
-        }
-        p {
-            margin: 0 0 18px;
-            color: var(--muted);
-        }
-        .links {
-            display: grid;
-            gap: 12px;
-        }
-        a {
-            display: block;
-            padding: 14px 16px;
-            color: var(--text);
-            text-decoration: none;
-            background: #0f1720;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-        }
-        a:hover { border-color: var(--accent); }
-        code {
-            color: #c9d1d9;
-            background: rgba(255,255,255,0.06);
-            padding: 2px 6px;
-            border-radius: 6px;
-        }
-        .hint {
-            margin-top: 18px;
-            font-size: 0.95rem;
-            color: var(--muted);
-        }
-    </style>
 </head>
 <body>
-    <main>
-        <h1>Jirapatr Thai Repository</h1>
-        <p>Use this page as the Kodi source URL, then install the repository ZIP below.</p>
-        <div class="links">
-            <a href="$RepoZipName">Download repository ZIP</a>
-            <a href="$FeedRelativePath">Browse Kodi feed</a>
-            <a href="$SkinZipRelativePath">Download skin ZIP</a>
-        </div>
-        <p class="hint">Kodi source URL: <code>https://jirapatr.github.io/skin.arctic.horizon.2/</code></p>
-    </main>
+    <a href="$RepoZipRelativePath">$RepoZipName</a>
 </body>
 </html>
 "@
@@ -190,7 +118,7 @@ function New-IndexHtml {
 }
 
 $indexHtmlPath = Join-Path $RepoRoot 'index.html'
-New-IndexHtml -Path $indexHtmlPath -RepoZipName (Split-Path -Path $repoZip -Leaf) -SkinZipRelativePath ('repo/zips/skin.arctic.horizon.2/' + (Split-Path -Path $skinZip -Leaf)) -FeedRelativePath 'repo/zips/addons.xml'
+New-IndexHtml -Path $indexHtmlPath -RepoZipName (Split-Path -Path $repoZip -Leaf) -RepoZipRelativePath (Split-Path -Path $repoZip -Leaf)
 
 Write-Host "Built skin zip: $skinZip"
 Write-Host "Built repo feed: $addonsXmlPath"
